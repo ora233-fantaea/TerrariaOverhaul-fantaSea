@@ -52,6 +52,7 @@
 - Added bite sound effects to Zombies.
 - Crimson and Corruption enemies now have new hit and death audio.
 - Music Playback Position Preservation no longer affects boss tracks by default. Two options were added, a toggle for that behavior, and a list for music tracks to exclude manually. The latter however can only be modified through `Config.toml` for now.
+- Fixed reverb silencing all mod music. FNA's `INTERNAL_applyReverb` reuses the voice's dry output matrix buffer; streaming voices (`tModLoader`'s `ASoundEffectBasedAudioTrack` is a `DynamicSoundEffectInstance`) never regenerate that matrix, so the track kept reporting a normal volume and a full buffer queue while rendering silence. Reverb sends are now skipped for dynamic voices.
 - Killing Blows sounds made quiter.
 - Gore footstep sounds made quiter.
 ### Camera
